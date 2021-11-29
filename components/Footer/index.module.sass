@@ -1,0 +1,70 @@
+@import 'styles/variables'
+
+
+.footer
+	width: 762px
+	margin: 0 auto 32px
+	display: flex
+	flex-direction: column
+
+
+	& > *
+		margin-top: 64px
+
+
+	&_feedback
+		width: 469px
+		margin-left: auto
+
+
+		& > *:not(:last-child)
+			margin-bottom: 24px
+
+
+		p
+			color: $c-gray
+
+
+		a
+			color: $c-red
+			font-size: 40px
+			line-height: 40px
+			letter-spacing: -0.04em
+			transition: color, background-color 0.2s
+
+			&:hover
+				background-color: $c-red
+				color: white
+
+
+	&_about
+		display: flex
+		justify-content: space-between
+
+		h3
+			margin-bottom: 16px
+
+
+	&_socials
+		display: flex
+		flex-direction: column
+		align-items: flex-start
+
+		a
+			display: block
+			transition: color, background-color 0.2s
+
+			&:hover
+				color: white
+
+		.instagram:hover
+			background-color: $c-instagram
+
+		.telegram:hover
+			background-color: $c-telegram
+
+	&_credits
+		width: 469px
+
+
+

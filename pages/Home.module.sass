@@ -1,0 +1,61 @@
+@import 'styles/variables'
+@import 'styles/mixins'
+
+.container
+	@include container
+
+.home
+	display: flex
+	flex-direction: column
+	width: 664px
+	margin: 132px 0 128px auto
+
+	> *:not(:last-child)
+		margin-bottom: 32px
+
+	span
+		color: $c-gray
+
+	a
+		margin-right: 26px
+
+
+.article
+	display: flex
+	flex-wrap: wrap
+
+	&Item
+		display: flex
+		flex-direction: column
+		align-items: center
+
+		&__name
+			margin-top: 24px
+		&__city
+			margin-top: 4px
+			color: $c-gray
+		img
+			width: 100%
+			object-fit: contain
+		.imageContainer
+			overflow: hidden
+
+	&__first
+		.imageContainer
+			width: 430px
+			height: 600px
+
+	&__second
+		margin-left: 64px
+		margin-top: 64px
+
+		.imageContainer
+			width: 644px
+			height: 644px
+
+	&__third
+		margin: 64px auto 64px
+
+		.imageContainer
+			width: 954px
+			height: 552px

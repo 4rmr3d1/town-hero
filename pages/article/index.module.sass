@@ -1,0 +1,69 @@
+@import 'styles/mixins'
+@import 'styles/variables'
+
+.article
+	@include container
+	margin-top: 132px
+
+	&Head
+		display: flex
+		justify-content: space-between
+
+	&Stats
+		width: 224px
+
+	&Info
+		width: 664px
+
+	&Info
+		& > *:not(:last-child)
+			margin-bottom: 32px
+
+
+	&Content
+		&__image
+			margin-top: 64px
+			width: 100%
+			height: 552px
+			overflow: hidden
+
+			img
+				width: 100%
+				object-fit: contain
+
+		&__description
+			margin-top: 24px
+			width: 100%
+			text-align: center
+			color: $c-gray
+
+.divider
+	width: 100%
+	height: 1px
+	background-color: $c-divider
+
+
+.about
+	display: flex
+
+	& > div:first-child
+		margin-right: 78px
+
+	& > div
+		flex: 1 0 293px
+
+.next
+	cursor: pointer
+	margin: 64px 0
+	width: 100%
+	background-color: $c-black
+
+	&Content
+		@include container
+		padding: 64px 0 64px
+
+	&Text
+		width: 566px
+		margin-left: auto
+		h1
+			color: white
