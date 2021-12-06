@@ -4,10 +4,11 @@
 .container
 	@include container
 
+
 .home
 	display: flex
 	flex-direction: column
-	width: 664px
+	width: 644px
 	margin: 132px 0 128px auto
 
 	> *:not(:last-child)
@@ -23,6 +24,16 @@
 .article
 	display: flex
 	flex-wrap: wrap
+
+	&City
+		display: flex
+		flex-direction: column
+		width: 644px
+		margin: 128px 0 64px auto
+
+		span
+			margin-top: 16px
+			color: $c-gray
 
 	&Item
 		display: flex
