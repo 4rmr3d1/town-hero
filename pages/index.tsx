@@ -48,9 +48,7 @@ export const Home = () => {
         }
 
         getArticles()
-    }, [])
-
-    useEffect(() =>  console.log(groupedArticles), [articles])
+    }, [articlesCollection])
 
     return (
         <div className={styles.container}>
@@ -80,7 +78,10 @@ export const Home = () => {
                             (index + 1) % 3 === 0 && styles.article__third
                         )}>
                             <div className={styles.imageContainer}>
-                                <img src={`${article?.places?.[0]?.image}`} alt=""/>
+                                <img
+                                    src={`${article?.places?.[0]?.image}`}
+                                    alt={article?.description}
+                                />
                             </div>
 
                             <div className={styles.articleItem__name}>{article?.title}</div>
@@ -109,7 +110,10 @@ export const Home = () => {
                                     (index + 1) % 3 === 0 && styles.article__third
                                 )}>
                                     <div className={styles.imageContainer}>
-                                        <img src={`${article?.places?.[0]?.image}`} alt=""/>
+                                        <img
+                                            src={`${article?.places?.[0]?.image}`}
+                                            alt={article?.description}
+                                        />
                                     </div>
 
                                     <div className={styles.articleItem__name}>{article?.title}</div>
