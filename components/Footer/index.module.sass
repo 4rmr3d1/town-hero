@@ -1,34 +1,21 @@
 @import 'styles/variables'
+@import 'styles/mixins'
 
 
 .footer
-	width: 762px
-	margin: 0 auto 32px
 	display: flex
 	flex-direction: column
-
-
-	& > *
-		margin-top: 64px
-
+	@include container
 
 	&_feedback
-		width: 469px
-		margin-left: auto
-
-
 		& > *:not(:last-child)
 			margin-bottom: 24px
-
 
 		p
 			color: $c-gray
 
-
 		a
 			color: $c-red
-			font-size: 40px
-			line-height: 40px
 			letter-spacing: -0.04em
 			transition: color, background-color 0.2s
 
@@ -64,7 +51,70 @@
 			background-color: $c-telegram
 
 	&_credits
-		width: 469px
+		p
+			color: $c-gray
+
+
+	@include desktop
+		width: 762px
+		margin: 0 auto 32px
+
+		& > *
+			margin-top: 64px
+
+		&_feedback
+			& > *:not(:last-child)
+				margin-bottom: 24px
+
+			p
+				color: $c-gray
+
+			a
+				font-size: 40px
+				line-height: 40px
+
+		&_credits
+			width: 469px
+
+	@include tablet
+		width: 762px
+		margin: 0 auto 32px
+
+		& > *
+			margin-top: 64px
+
+		&_feedback
+			& > *:not(:last-child)
+				margin-bottom: 24px
+
+			p
+				color: $c-gray
+
+			a
+				font-size: 40px
+				line-height: 40px
+
+		&_credits
+			width: 469px
+
+	@include mobile
+		@include container
+
+		& > *
+			margin-top: 44px
+
+		&_feedback
+			a
+				font-size: 24px
+				line-height: 28px
+
+
+		&_credits
+			padding-left: 26px
+
+			p
+				line-height: 24px
+
 
 
 

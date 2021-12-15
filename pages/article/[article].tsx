@@ -1,32 +1,14 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment} from "react";
 import Link from 'next/link'
-import {useRouter} from "next/router";
-import {doc, getDoc} from "@firebase/firestore";
+import {collection, doc, getDoc, getDocs} from "@firebase/firestore";
 import {db} from "../../firebase/clientApp";
 import {Footer} from "../../components/Footer";
 import {Header} from "../../components/Header";
 
 import styles from './index.module.sass'
 
-export const Article = () => {
-    const router = useRouter()
-    const {article} = router.query
-
-    const [currentArticle, setCurrentArticle] = useState(null)
-
-    useEffect(() => {
-        const ref = doc(db, 'article', `${article}`)
-
-        const getArticle = async () => {
-            const articleSnap = await getDoc(ref)
-
-            if (articleSnap.exists()) {
-                setCurrentArticle(articleSnap.data())
-            }
-        }
-
-        getArticle()
-    }, [article])
+export const Article = ({ article }) => {
+    const currentArticle = JSON.parse(article)
 
     return (
         <div className={styles.container}>
@@ -107,3 +89,26 @@ export const Article = () => {
 }
 
 export default Article
+
+export const getStaticPaths = async () => {
+    const snapshot = await getDocs(collection(db, 'article'))
+    const paths = snapshot.docs.map(doc => ({
+        params: { article: doc.id.toString() }
+    }))
+
+    return {
+        paths,
+        fallback: false
+    }
+}
+
+export const getStaticProps = async (context) => {
+    const id = context.params.article
+
+    const docRef = doc(db, 'article', id)
+    const docSnap = await getDoc(docRef)
+
+    return {
+        props: { article: JSON.stringify(docSnap.data()) || null }
+    }
+}

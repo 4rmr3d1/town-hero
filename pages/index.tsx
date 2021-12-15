@@ -1,12 +1,13 @@
 import React, {useEffect, useMemo, useState} from 'react'
 import cn from 'classnames';
 import Link from 'next/link';
-import {collection, getDocs} from "@firebase/firestore";
+import {collection, doc, getDoc, getDocs} from "@firebase/firestore";
 import {Header} from "../components/Header";
 import {Footer} from "../components/Footer";
 import {db} from "../firebase/clientApp";
 
 import styles from './Home.module.sass'
+import {ArticleBlock} from "../components/ArticleBlock";
 
 const articlesSortedByCity = (articles) =>
     articles?.reduce((acc, article) => {
@@ -29,106 +30,66 @@ const cityQuote = {
 
 const formatQuoteByCity = (city) => cityQuote[city]
 
-export const Home = () => {
-    const [articles, setArticles] = useState([])
-    const articlesCollection = collection(db, 'article')
-    const groupedArticles = useArticlesGrouping(articles)
+export const Home = ({ articles }) => {
+    const avalArticles = JSON.parse(articles)
+    const groupedArticles = useArticlesGrouping(avalArticles)
     const citiesByArticles = Object.keys(groupedArticles)
 
-    useEffect(() => {
-        const getArticles = async () => {
-            const response = await getDocs(articlesCollection);
-
-            setArticles(response.docs.map(article =>
-                ({
-                    ...article.data(),
-                    id: article.id,
-                })
-            ))
-        }
-
-        getArticles()
-    }, [articlesCollection])
 
     return (
-        <div className={styles.container}>
+        <>
             <Header/>
 
-            <main className={cn(styles.home, styles.title)}>
-                <h1 className={styles.home__title}>
-                    Авторские гайды по&nbsp;городам России
-                </h1>
+            <div className={styles.container}>
 
-                <span>
+                <main className={cn(styles.home, styles.title)}>
+                    <h1 className={styles.home__title}>
+                        Авторские гайды по&nbsp;городам России
+                    </h1>
+
+                    <span>
                     а именно
                 </span>
 
-                <div className={styles.home_filters}>
-                    {citiesByArticles?.map(city => <a href={`#${city}`} key={city}> {city}</a>)}
-                </div>
-            </main>
+                    <div className={styles.home_filters}>
+                        {citiesByArticles?.map(city => <a href={`#${city}`} key={city}> {city}</a>)}
+                    </div>
+                </main>
 
-            <div className={styles.article}>
-                {articles?.map((article, index) =>
-                    <Link href={`/article/${article?.id}`} key={article?.id}>
-                        <div className={cn(
-                            styles.articleItem,
-                            (index + 1) % 3 === 1 && styles.article__first,
-                            (index + 1) % 3 === 2 && styles.article__second,
-                            (index + 1) % 3 === 0 && styles.article__third
-                        )}>
-                            <div className={styles.imageContainer}>
-                                <img
-                                    src={`${article?.places?.[0]?.image}`}
-                                    alt={article?.description}
-                                />
-                            </div>
+                <ArticleBlock articles={avalArticles}/>
 
-                            <div className={styles.articleItem__name}>{article?.title}</div>
+                {citiesByArticles?.map((city, cIndex) =>
+                    <>
+                        <div className={cn(styles.articleCity, styles.title)} id={city}>
+                            <h2 className={styles.articleCity__title}>{city}</h2>
 
-                            <div className={styles.articleItem__city}>{article?.city}</div>
+                            <span>{formatQuoteByCity(city)}</span>
                         </div>
-                    </Link>
+
+                        <ArticleBlock articles={groupedArticles[city]}/>
+                    </>
                 )}
             </div>
 
-            {citiesByArticles?.map((city, cIndex) =>
-                <>
-                    <div className={cn(styles.articleCity, styles.title)} id={city}>
-                        <h2 className={styles.articleCity__title}>{city}</h2>
-
-                        <span>{formatQuoteByCity(city)}</span>
-                    </div>
-
-                    <div className={styles.article} key={cIndex + city}>
-                        {groupedArticles[city]?.map((article, index) =>
-                            <Link href={`/article/${article?.id}`} key={article?.id}>
-                                <div className={cn(
-                                    styles.articleItem,
-                                    (index + 1) % 3 === 1 && styles.article__first,
-                                    (index + 1) % 3 === 2 && styles.article__second,
-                                    (index + 1) % 3 === 0 && styles.article__third
-                                )}>
-                                    <div className={styles.imageContainer}>
-                                        <img
-                                            src={`${article?.places?.[0]?.image}`}
-                                            alt={article?.description}
-                                        />
-                                    </div>
-
-                                    <div className={styles.articleItem__name}>{article?.title}</div>
-
-                                    <div className={styles.articleItem__city}>{article?.city}</div>
-                                </div>
-                            </Link>
-                        )}
-                    </div>
-                </>
-            )}
 
             <Footer/>
-        </div>
+        </>
     )
 }
 
 export default Home
+
+export const getStaticProps = async () => {
+    const articlesCollection = collection(db, 'article')
+    const response = await getDocs(articlesCollection);
+    const articles = response.docs.map(article =>
+        ({
+            ...article.data(),
+            id: article.id,
+        })
+    )
+
+    return {
+        props: { articles: JSON.stringify(articles) }
+    }
+}

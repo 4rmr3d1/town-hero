@@ -1,8 +1,31 @@
+@mixin desktop
+	@media (min-width: 1160px)
+		@content
+
+@mixin tablet
+	@media (min-width: 961px) and (max-width: 1159px)
+		@content
+
+@mixin mobile
+	@media (min-width: 320px) and (max-width: 960px)
+		@content
+
 @mixin h($font-size)
 	font-size: $font-size
 	font-weight: 700
 	line-height: $font-size
 
 @mixin container
-	width: 1140px
-	margin: 0 auto
+	@include desktop
+		width: 1140px
+		margin: 0 auto
+
+	@include tablet
+		width: 920px
+		margin: 0 auto
+
+	@include mobile
+		width: 100%
+		padding-left: 10px
+		padding-right: 10px
+

@@ -4,15 +4,9 @@
 .container
 	@include container
 
-
 .home
 	display: flex
 	flex-direction: column
-	width: 644px
-	margin: 132px 0 128px auto
-
-	> *:not(:last-child)
-		margin-bottom: 32px
 
 	span
 		color: $c-gray
@@ -20,56 +14,48 @@
 	a
 		margin-right: 26px
 
+	@include desktop
+		width: 644px
+		margin: 132px 0 128px auto
+
+		> *:not(:last-child)
+			margin-bottom: 32px
+
+	@include tablet
+		width: 511px
+		margin: 132px 0 128px auto
+
+		> *:not(:last-child)
+			margin-bottom: 32px
+
+	@include mobile
+		margin-top: 128px
+
+		> *
+			margin-bottom: 24px
+
+		a
+			display: inline-block
+			padding-bottom: 14px
 
 .article
-	display: flex
-	flex-wrap: wrap
-
 	&City
 		display: flex
 		flex-direction: column
-		width: 644px
-		margin: 128px 0 64px auto
 
 		span
 			margin-top: 16px
 			color: $c-gray
 
-	&Item
-		display: flex
-		flex-direction: column
-		align-items: center
-
-		&__name
-			margin-top: 24px
-		&__city
-			margin-top: 4px
-			color: $c-gray
-		img
-			object-fit: cover
-		.imageContainer
-			position: relative
-			overflow: hidden
-			display: flex
-			justify-content: center
-			align-items: center
-
-	&__first
-		.imageContainer
-			width: 430px
-			height: 600px
-
-	&__second
-		margin-left: 64px
-		margin-top: 64px
-
-		.imageContainer
+		@include desktop
 			width: 644px
-			height: 644px
+			margin: 128px 0 64px auto
 
-	&__third
-		margin: 64px auto 64px
+		@include tablet
+			width: 511px
+			margin: 128px 0 64px auto
 
-		.imageContainer
-			width: 954px
-			height: 552px
+	@include mobile
+		&City
+			text-align: center
+			margin-top: 128px

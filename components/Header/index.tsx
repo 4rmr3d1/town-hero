@@ -15,10 +15,6 @@ export const Header = () => {
                     2021      2022
                 </span>
             </div>
-
-            <div>
-                Предложить свой
-            </div>
         </header>
     )
 }
