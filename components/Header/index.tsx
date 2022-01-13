@@ -9,12 +9,6 @@ export const Header = () => {
                 <Link href='/'>Town Hero</Link>
                 <span className={styles.muted}>Guide Service</span>
             </div>
-
-            <div>
-                <span className={styles.muted}>
-                    2021      2022
-                </span>
-            </div>
         </header>
     )
 }

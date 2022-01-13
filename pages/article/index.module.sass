@@ -1,13 +1,17 @@
 @import 'styles/mixins'
 @import 'styles/variables'
 
+.city
+	@include background_sliding_animation(#e7e7e7)
+	display: inline-block
+	border-bottom: 1px dashed $c-gray
+
 .article
 	@include container
-	margin-top: 132px
+	padding-top: 132px
 
 	&Head
 		display: flex
-		justify-content: space-between
 
 	&Info
 		& > *:not(:last-child)
@@ -29,6 +33,30 @@
 			text-align: center
 			color: $c-gray
 
+	&Stats
+		display: flex
+
+		&__Item
+			height: 64px
+			width: 64px
+			border-radius: 50%
+			border: 1px solid #E7E7E7
+			display: flex
+			align-items: center
+			justify-content: center
+			flex-direction: column
+
+			&>div:first-child
+				font-size: 24px
+				line-height: 32px
+
+			&>div:last-child
+				font-size: 8px
+				line-height: 8px
+
+			&:not(:last-child)
+				margin-right: 16px
+
 	@include desktop
 		&Content
 			&__image
@@ -36,16 +64,32 @@
 
 		&Stats
 			width: 224px
+			margin-bottom: 32px
 
 		&Info
 			width: 664px
+
+		&Head
+			justify-content: space-between
 
 	@include tablet
 		&Stats
 			width: 224px
+			margin-bottom: 32px
 
 		&Info
 			width: 664px
+
+		&Head
+			flex-direction: column
+
+	@include mobile
+		&Head
+			flex-direction: column
+
+		&Stats
+			width: 224px
+			margin-bottom: 32px
 
 .divider
 	width: 100%
@@ -55,6 +99,7 @@
 
 .about
 	display: flex
+	line-height: 24px
 
 	@include desktop
 		& > div:first-child
@@ -91,6 +136,12 @@
 		margin-left: auto
 		h1
 			color: white
+			margin-bottom: 36px
+			@include background_sliding_animation(white)
+		div > span
+			color: white
+			margin-right: 8px
+
 
 	@include desktop
 		&Text

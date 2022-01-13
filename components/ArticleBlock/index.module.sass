@@ -17,6 +17,7 @@
 
 		img
 			object-fit: cover
+			transition: transform .3s ease-in-out, -webkit-transform .3s ease-in-out
 
 		.imageContainer
 			position: relative
@@ -24,6 +25,14 @@
 			display: flex
 			justify-content: center
 			align-items: center
+			cursor: pointer
+
+			&:hover img
+				transform: scale(0.99)
+
+		&__name
+			cursor: pointer
+			@include background_sliding_animation(#E7E7E7)
 
 	@include desktop
 		&Item

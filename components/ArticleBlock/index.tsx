@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import cn from 'classnames';
 import Link from "next/link";
 import styles from "./index.module.sass";
@@ -7,7 +7,7 @@ export const ArticleBlock = ({articles}) => {
     return (
         <div className={styles.article}>
             {articles?.map((article, index) =>
-                <Link href={`/article/[article]`} key={article?.id + index} as={`/article/${article?.id}`} >
+                <Fragment key={article?.id + index}>
                     <div
                         key={index}
                         className={cn(
@@ -17,18 +17,22 @@ export const ArticleBlock = ({articles}) => {
                             (index + 1) % 3 === 0 && styles.article__third
                         )}
                     >
-                        <div className={styles.imageContainer}>
-                            <img
-                                src={`${article?.places?.[0]?.image}`}
-                                alt={article?.description}
-                            />
-                        </div>
+                        <Link href={`/article/[article]`} as={`/article/${article?.id}`}>
+                            <div className={styles.imageContainer}>
+                                <img
+                                    src={`${article?.places?.[0]?.image}`}
+                                    alt={article?.description}
+                                />
+                            </div>
+                        </Link>
 
-                        <div className={styles.articleItem__name}>{article?.title}</div>
+                        <Link href={`/article/[article]`} as={`/article/${article?.id}`}>
+                            <div className={styles.articleItem__name}>{article?.title}</div>
+                        </Link>
 
                         <div className={styles.articleItem__city}>{article?.city}</div>
                     </div>
-                </Link>
+                </Fragment>
             )}
         </div>
     )

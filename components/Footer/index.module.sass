@@ -40,15 +40,16 @@
 		a
 			display: block
 			transition: color, background-color 0.2s
+			line-height: 24px
 
 			&:hover
 				color: white
 
-		.instagram:hover
-			background-color: $c-instagram
+		.instagram
+			@include background_sliding_animation($c-instagram)
 
-		.telegram:hover
-			background-color: $c-telegram
+		.telegram
+			@include background_sliding_animation($c-telegram)
 
 	&_credits
 		p
@@ -63,6 +64,8 @@
 			margin-top: 64px
 
 		&_feedback
+			width: 469px
+			margin-left: auto
 			& > *:not(:last-child)
 				margin-bottom: 24px
 
@@ -84,6 +87,8 @@
 			margin-top: 64px
 
 		&_feedback
+			width: 469px
+			margin-left: auto
 			& > *:not(:last-child)
 				margin-bottom: 24px
 

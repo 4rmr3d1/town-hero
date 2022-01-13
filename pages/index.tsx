@@ -35,7 +35,6 @@ export const Home = ({ articles }) => {
     const groupedArticles = useArticlesGrouping(avalArticles)
     const citiesByArticles = Object.keys(groupedArticles)
 
-
     return (
         <>
             <Header/>
@@ -44,7 +43,7 @@ export const Home = ({ articles }) => {
 
                 <main className={cn(styles.home, styles.title)}>
                     <h1 className={styles.home__title}>
-                        Авторские гайды по&nbsp;городам России
+                        Барные маршруты по&nbsp;городам России
                     </h1>
 
                     <span>
